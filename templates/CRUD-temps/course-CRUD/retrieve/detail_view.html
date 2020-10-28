@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block css %}
+
+    <style>
+        .container{
+                margin-top: 3%;
+            }
+        .jumbotron{
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);;
+        }
+        img{
+            width: 10rem;
+        }
+        h1{
+            font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+        }
+        @media screen and (min-width: 601px) {
+            .display-3{
+            font-size: 80px;
+            }
+            .display-4{
+                font-size: 50px;
+            }
+            .lead{
+                font-size: 25px;
+            }
+            strong{
+                font-size: 25px;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .display-3 {
+            font-size: 30px;
+            }
+            .display-4{
+                font-size: 25px;
+            }
+            .lead{
+                font-size: 18px;
+            }
+            strong{
+                font-size: 18px;
+            }
+        }
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="jumbotron">
+            {% if object.image %}
+                <img class="rounded mx-auto d-block" src="{{  object.image.url }}" alt="Pic">
+            {% endif %}
+            <h1 class="display-3 text-center">{{ object.course }}</h1>
+
+            <br>
+            <br>
+
+            <h1 class="display-4 text-center">Eligibility</h1>
+            <hr class="my-2">
+            <p class="lead text-center">{{ coursemodel.eligibility }}</p>
+            <br>
+
+            <h1 class="display-4 text-center">Duration Of Course</h1>
+            <hr class="my-2">
+            <p class="lead text-center">{{ coursemodel.duration_of_course }}</p>
+            <br>
+
+            <h1 class="display-4 text-center">Syllabus</h1>
+            <hr class="my-2">
+            <p class="lead text-center">{{ coursemodel.syllabus }}</p>
+            <br>
+
+            <h1 class="display-4 text-center">Details</h1>
+            <hr class="my-2">
+            <p class="lead text-center">{{ coursemodel.extra_details }}</p>
+            <br>
+
+            <h1 class="display-4 text-center">Fees</h1>
+            <hr class="my-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm text-left">
+                        <strong>Year 1: </strong><span class="lead">Rs.{{ object.year_1_fees }}/-</span>
+                    </div>
+                    <div class="col-sm text-left">
+                        <strong>Year 2: </strong><span class="lead">Rs.{{ object.year_2_fees }}/-</span>
+                    </div>
+                    <div class="col-sm text-left">
+                        <strong>Year 3: </strong><span class="lead">Rs.{{ object.year_3_fees }}/-</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+
+    <style>
+        .container{
+            margin-top: 3%;
+            width: 100%;
+        }
+        .jumbotron{
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        img{
+            width: 10rem;
+            height: auto;
+        }
+        .main{
+            font-weight: bold;
+        }
+        @media screen and (min-width: 601px) {
+            .ans{
+                font-size: 20px;
+            }
+            .main {
+              font-size: 25px;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .ans{
+                font-size: 12px;
+            }
+            .main {
+                font-size: 15px;
+            }
+        }
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all_forms.css' %}">
+{% endblock %}
+
+{% block body %}
+    {% if request.user.is_superuser or request.user.is_staff %}
+    <div class="container">
+        <div class="jumbotron">
+            {% if object.photo %}
+                <img class="rounded mx-auto d-block" src="{{  object.photo.url }}" alt="Pic">
+            {% endif %}
+            <div class="container">
+                <div class="row">
+                    <div class="col main">Name</div>
+                    <div class="col ans">
+                        {{ object.surname}}&nbsp;{{ object.name }}&nbsp;
+                        {{ object.father_first_name }}&nbsp;{{ object.mother_first_name }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Date of birth</div>
+                    <div class="col ans">
+                        {{ object.date_of_birth }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Place of Birth</div>
+                    <div class="col ans">
+                        {{ object.place_of_birth }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Gender</div>
+                    <div class="col ans">
+                        {{ object.gender }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Blood Group</div>
+                    <div class="col ans">
+                        {{ object.blood_group }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Nationality</div>
+                    <div class="col ans">
+                        {{ object.nationality }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Nationality</div>
+                    <div class="col ans">
+                        {{ object.nationality }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Religion</div>
+                    <div class="col ans">
+                        {{ object.religion }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Mother Tongue</div>
+                    <div class="col ans">
+
+                        {{ object.mother_tongue }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Aadhaar</div>
+                    <div class="col ans">
+                        {{ object.aadhaar }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Phone</div>
+                    <div class="col ans">
+                        {{ object.phone }}
+                    </div><div class="w-100"></div><br>
+
+                    {% if object.alternate_phone %}
+                        <div class="col main">Alternate Phone</div>
+                            <div class="col ans">
+                            {{ object.alternate_phone }}
+                        </div><div class="w-100"></div><br>
+                    {% endif %}
+
+                    <div class="col main">Email</div>
+                    <div class="col ans">
+                        {{ object.email }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Physically Challenged</div>
+                    {% if object.physically_challenged %}
+                        <div class="col ans">
+                            <i class="fas fa-check-circle" style="color: green"></i>
+                        </div><div class="w-100"></div><br>
+                    {% else %}
+                        <div class="col ans">
+                            <i class="fas fa-times-circle" style="color: red"></i>
+                        </div><div class="w-100"></div><br>
+                    {% endif %}
+
+                    <div class="col main">Flat/Building/Street/Area</div>
+                    <div class="col ans">
+                        {{ object.flat_building_street_area }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Pincode</div>
+                    <div class="col ans">
+                        {{ object.pincode }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">City</div>
+                    <div class="col ans">
+                        {{ object.city }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">District</div>
+                    <div class="col ans">
+                        {{ object.district }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Tehsil</div>
+                    <div class="col ans">
+                        {{ object.tehsil }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Guardian Full Name</div>
+                    <div class="col ans">
+                        {{ object.guardian_full_name }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Guardian Phone</div>
+                    <div class="col ans">
+                        {{ object.guardian_phone }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Guardian Email</div>
+                    <div class="col ans">
+                        {{ object.guardian_email }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Guardian Occupation</div>
+                    <div class="col ans">
+                        {{ object.guardian_occupation }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Guardian Annual Income</div>
+                    <div class="col ans">
+                        {{ object.guardian_annual_income }}
+                    </div><div class="w-100"></div><br>
+
+                    {% if object.MU_application_no %}
+                        <div class="col main">MU Application No.</div>
+                        <div class="col ans">
+                            {{ object.MU_application_no }}
+                        </div><div class="w-100"></div><br>
+                    {% endif %}
+
+                    {% if object.previous_college_name %}
+                        <div class="col main">Previous College Name</div>
+                        <div class="col ans">
+                            {{ object.previous_college_name }}
+                        </div><div class="w-100"></div><br>
+                    {% endif %}
+
+                    {% if object.previous_passing_year %}
+                        <div class="col main">Previous Passing Year</div>
+                        <div class="col ans">
+                            {{ object.previous_passing_year }}
+                        </div><div class="w-100"></div><br>
+                    {% endif %}
+
+                    {% if object.SSC_percentage %}
+                        <div class="col main">SSC Score</div>
+                        <div class="col ans">
+                            {{ object.SSC_percentage }}
+                        </div><div class="w-100"></div><br>
+                    {% endif %}
+
+                    {% if object.HSC_percentage %}
+                        <div class="col main">HSC Score</div>
+                        <div class="col ans">
+                            {{ object.HSC_percentage }}
+                        </div><div class="w-100"></div><br>
+                    {% endif %}
+
+                    {% if object.semester_1_SGPI %}
+                        <div class="col main">Semester 1 SGPI</div>
+                        <div class="col ans">
+
+                            {{ object.semester_1_SGPI }}
+                        </div><div class="w-100"></div><br>
+                    {% endif %}
+
+                    {% if object.semester_2_SGPI %}
+                        <div class="col main">Semester 2 SGPI</div>
+                        <div class="col ans">
+                            {{ object.semester_2_SGPI }}
+                        </div><div class="w-100"></div><br>
+                    {% endif %}
+
+                    {% if object.semester_3_SGPI %}
+                        <div class="col main">Semester 3 SGPI</div>
+                        <div class="col ans">
+                            {{ object.semester_3_SGPI }}
+                        </div><div class="w-100"></div><br>
+                    {% endif %}
+
+                    {% if object.semester_4_SGPI %}
+                        <div class="col main">Semester 4 SGPI</div>
+                        <div class="col ans">
+                            {{ object.semester_4_SGPI }}
+                        </div><div class="w-100"></div><br>
+                    {% endif %}
+
+                    {% if object.SSC_mark_sheet %}
+                        <div class="col main">SSC Mark Sheet</div>
+                        <div class="col ans">
+                            <a class="btn btn-sm btn-outline-secondary" href="{{ object.SSC_mark_sheet.url }}">View File</a>
+                        </div>
+                        <div class="w-100"></div><br>
+                    {% endif %}
+
+                    {% if object.HSC_mark_sheet %}
+                        <div class="col main">HSC Mark Sheet</div>
+                        <div class="col ans">
+                            <a class="btn btn-sm btn-outline-secondary" href="{{ object.HSC_mark_sheet.url }}">View File</a>
+                        </div>
+                        <div class="w-100"></div><br>
+                    {% endif %}
+
+                    {% if object.previous_year_mark_sheet %}
+                        <div class="col main">Previous Year Mark Sheet</div>
+                        <div class="col ans">
+                            <a class="btn btn-sm btn-outline-secondary" href="{{ object.previous_year_mark_sheet.url }}">View File</a>
+                        </div>
+                        <div class="w-100"></div><br>
+                    {% endif %}
+
+                    {% if object.MU_application %}
+                        <div class="col main">Mumbai University Application</div>
+                        <div class="col ans">
+                            <a class="btn btn-sm btn-outline-secondary" href="{{ object.MU_application.url }}">View File</a>
+                        </div>
+                        <div class="w-100"></div><br>
+                    {% endif %}
+
+                    {% if object.in_house %}
+                        <div class="col main">In-House</div>
+                        <div class="col ans">
+                            <i class="fas fa-check-circle" style="color: green"></i>
+                        </div><div class="w-100"></div><br>
+                    {% endif %}
+
+                    {% if object.out_house %}
+                        <div class="col main">Out-House</div>
+                        <div class="col ans">
+                            <i class="fas fa-check-circle" style="color: green"></i>
+                        </div><div class="w-100"></div><br>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    Choose Year
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/adminDashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/AdminListView.css' %}">
+{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto">
+        <ul class="list-group list-group-horizontal-sm">
+            <li class="list-group-item mx-auto">
+                <a style="text-decoration: none;" href="{% url 'fy_form' %}">
+                    <div class="card card-user">
+                        <img src="{% static 'adminDashboardPics/first.png' %}" class="card-img-top card-img-top-user" alt="pic">
+                        <div class="card-body">
+                            <p class="card-text card-text-user">First Year</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="list-group-item mx-auto">
+                <a style="text-decoration: none;" href="{% url 'sy_in_out_house' %}">
+                    <div class="card card-user">
+                        <img src="{% static 'adminDashboardPics/second.png' %}" class="card-img-top card-img-top-user" alt="pic">
+                        <div class="card-body">
+                            <p class="card-text card-text-user">Second Year</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="list-group-item mx-auto">
+                <a style="text-decoration: none;" href="{% url 'ty_in_out_house' %}">
+                    <div class="card card-user">
+                        <img src="{% static 'adminDashboardPics/third.png' %}" class="card-img-top card-img-top-user" alt="pic">
+                        <div class="card-body">
+                            <p class="card-text card-text-user">Third Year</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

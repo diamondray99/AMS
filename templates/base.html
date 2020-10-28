@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+
+
+    <title>{% block page_title %} {% endblock %}</title>
+
+    {% block css %}
+
+    {% endblock %}
+
+    <style>
+        body{
+            background: whitesmoke;
+        }
+    </style>
+
+</head>
+<body>
+
+{% include 'snippets/base/navbar.html' %}
+
+{% block body %}
+
+{% endblock %}
+
+{% include 'snippets/base/footer.html' %}
+
+
+
+<script src="{% static 'bootstrap/jquery/jquery-3.4.1.slim.min.js' %}"></script>
+<script src="{% static 'bootstrap/popper/popper.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+
+{% block js %}
+
+{% endblock %}
+
+</body>
+</html>

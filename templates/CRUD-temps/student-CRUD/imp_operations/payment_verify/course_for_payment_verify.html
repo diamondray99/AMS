@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+
+    {% if request.user.is_superuser or request.user.is_staff %}
+        Course List Admin
+    {% else %}
+        Courses
+    {% endif %}
+
+{% endblock %}
+
+{% block css %}
+
+    <link rel="stylesheet" href="{% static 'css/adminDashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/AdminListView.css' %}">
+
+{% endblock %}
+
+{% block body %}
+    {% if coursemodel_list.count != 0 %}
+        {% if request.user.is_superuser or request.user.is_staff %}
+            <div class="container mx-auto">
+                <ul class="list-group list-group-horizontal-sm">
+                    {% for i in coursemodel_list %}
+                        <li class="list-group-item mx-auto">
+                            <a style="text-decoration: none;" href="{% url 'verify_payment' i.slug %}">
+                                <div class="card card-user">
+                                    {% if i.image %}
+                                        <img src="{{ i.image.url }}" class="card-img-top card-img-top-user" alt="Pic">
+                                    {% else %}
+                                        <img src="{% static 'basic/no-image.png' %}" class="card-img-top card-img-top-user" alt="No Image">
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <p class="card-text card-text-user">{{ i.course}}</p>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </li>
+                        {% if forloop.counter == 4 or forloop.counter == 8 or forloop.counter == 12 %}
+                        </ul><ul class="list-group list-group-horizontal-sm">
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% else %}
+        <h4>Courses not found! Please Add Courses in Database.</h4>
+    {% endif %}
+{% endblock %}

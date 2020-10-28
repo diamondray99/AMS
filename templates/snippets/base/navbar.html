@@ -1,0 +1,41 @@
+{% load static %}
+
+{% url 'home' as home %}
+{% url 'about' as about %}
+{% url 'dashboard' as dashboard %}
+{% url 'course_list' as course_list %}
+{% url 'courses_for_cutoffs' as cutoff_list %}
+{% url 'choose_year' as choose_year %}
+{% url 'login' as login %}
+{% url 'logout' as logout %}
+{% url 'view' as view %}
+
+
+
+<header>
+    <nav>
+        <div class="logo">AMS</div>
+        <input type="checkbox" id="clicknav">
+        <label for="clicknav" class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <ul>
+            <li><a class="{% if request.path == home %} active {% endif %}" href="{{ home }}">Home</a></li>
+            <li><a class="{% if request.path == about %} active {% endif %}" href="{{ about }}">About</a></li>
+
+            {% if not request.user.is_superuser and not request.user.is_staff %}
+                <li><a class="{% if request.path == course_list %} active {% endif %}" href="{{ course_list }}">Courses</a></li>
+                <li><a class="{% if request.path == cutoff_list %} active {% endif %}" href="{{ cutoff_list }}">CutOffs</a></li>
+                <li><a class="{% if request.path == create_student %} active {% endif %}" href="{{ choose_year }}">Admission</a></li>
+            {% endif %}
+
+
+            {% if request.user.is_authenticated %}
+                <li><a class="{% if request.path == dashboard %} active {% endif %}" href="{{ dashboard }}">Dashboard</a></li>
+                <li><a class="{% if request.path == logout %} active {% endif %}" href="{{ logout }}">Logout</a></li>
+            {% else %}
+                <li><a class="{% if request.path == login %} active {% endif %}" href="{{ login }}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+
+    {% if request.user.is_superuser %}
+        Cut-Offs List Admin
+    {% else %}
+        Cut-offs List
+    {% endif %}
+
+{% endblock %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/AdminListView.css' %}">
+{% endblock %}
+
+{% block body %}
+    {% if request.user.is_superuser or request.user.is_staff %}
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Sr. No.</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Student Capacity</th>
+                            <th scope="col">Active</th>
+                            <th scope="col" class='op'>Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in object_list %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>
+                                    {% if i.course.image %}
+                                        <img src="{{ i.course.image.url }}" class="admin" alt="Pic">
+                                    {% else %}
+                                        <img src="{% static 'basic/no-image.png' %}" class="admin" alt="No Image">
+                                    {% endif %}
+                                </td>
+                                <td>{{ i.course.course }}</td>
+                                <td>{% if i.year_1 %}
+                                    Year-1
+                                    {% elif i.year_2 %}
+                                    Year-2
+                                    {% elif i.year_3 %}
+                                    Year-3
+                                {% endif %} </td>
+                                <td>{{ i.student_capacity }}</td>
+                                <td>
+                                    {% if i.active %}
+                                        <img src="{% static 'basic/yes.png' %}" class="admin" alt="Pic">
+                                    {% else %}
+                                        <img src="{% static 'basic/no.png' %}" class="admin" alt="No Image">
+                                    {% endif %}
+                                </td>
+                                <td class="op">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a class="btn btn-primary" href="{% url 'update_student_capacity' i.slug %}">Update</a>
+                                        <a class="btn btn-danger" href="{% url 'delete_student_capacity' i.slug %}">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <h4>You are not permitted here!</h4>
+    {% endif %}
+{% endblock %}

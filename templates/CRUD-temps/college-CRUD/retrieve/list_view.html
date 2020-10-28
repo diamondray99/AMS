@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    List College Details
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/adminDashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/AdminListView.css' %}">
+{% endblock %}
+
+{% block body %}
+
+    {% if request.user.is_superuser or request.user.is_staff %}
+         <div class="container">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Sr. No.</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">File</th>
+                            <th scope="col">Title</th>
+                            <th scope="col" class='op'>Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in object_list %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>
+                                    {% if not i.image %}
+                                        <img src="{% static 'basic/no-image.png' %}" class="admin" alt="No Image">
+                                    {% else %}
+                                        <img src="{{ i.image.url }}" class="admin" alt="Pic">
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if not i.file %}
+                                        <img src="{% static 'basic/no-file.png' %}" class="admin" alt="No File">
+                                    {% else %}
+                                        <a class="btn btn-outline-primary " href="{{ i.file.url }}">File</a>
+                                    {% endif %}
+                                </td>
+                                <td>{{ i.title }}</td>
+                                <td class="op">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a class="btn btn-outline-secondary" href="{% url 'detail_college_details' i.slug %}">View</a>
+                                        <a class="btn btn-primary" href="{% url 'update_college_details' i.slug %}">Update</a>
+                                        <a class="btn btn-danger" href="{% url 'delete_college_details' i.slug %}">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

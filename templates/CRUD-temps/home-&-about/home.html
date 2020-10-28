@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    Home
+{% endblock %}
+
+{% block css %}
+    <style>
+        .jumbotron {
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 3%;
+        }
+
+        .jumbotron:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        .container{
+            margin-top: 2%;
+        }
+        .card-img{
+            height: 100%;
+            border-radius: 10px;
+        }
+        .btn-info{
+            margin-bottom: 1%;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        {% for i in collegedetailmodel_list %}
+            <div class="jumbotron">
+                <div class="row">
+                    {% if i.image %}
+                        <div class="col-sm-4">
+                            <img class="card-img" src="{{ i.image.url }}" alt="pic">
+                        </div>
+                        <div class="col-sm-8">
+                            <h1 class="display-4">{{ i.title }}</h1>
+                            <p class="lead">{{ i.sub_title}}</p>
+                            <hr class="my-4">
+                            <p>{{ i.details }}</p>
+                            {% if i.file %}
+                                <a class="btn btn-info" href="{{ i.file.url }}" role="button">View File</a>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div class="col">
+                            <h1 class="display-4">{{ i.title}}</h1>
+                            <p class="lead">{{ i.sub_title}}</p>
+                            <hr class="my-4">
+                            <p>{{ i.details }}</p>
+                            {% if i.file %}
+                                <a class="btn btn-info" href="{{ i.file.url }}" role="button">View File</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

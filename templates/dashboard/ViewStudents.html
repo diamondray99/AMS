@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load  static %}
+
+{% block page_title %}
+    Student
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/adminDashboard.css' %}">
+{% endblock %}
+
+{% block body %}
+    {% if request.user.is_superuser or request.user.is_staff %}
+
+    <div class="container">
+        <h3>Student Operations</h3>
+        <hr>
+
+        <div class="row">
+            <div class="col-sm">
+                <a href="{% url 'courses_for_verify' %}">
+                    <div class="card">
+                        <img src="{% static 'adminDashboardPics/verifyStudent.png' %}" class="card-img-top" alt="pic">
+                        <div class="card-body">
+                            <h4 class="card-title">Verify Pupil</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm">
+                <a href="{% url 'courses_for_select' %}">
+                    <div class="card">
+                        <img src="{% static 'adminDashboardPics/selectStudent.png' %}" class="card-img-top" alt="pic">
+                        <div class="card-body">
+                            <h4 class="card-title">Select Pupil</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm">
+                <a href="{% url 'courses_for_verify_payment' %}">
+                    <div class="card">
+                        <img src="{% static 'adminDashboardPics/paymentVerification.png' %}" class="card-img-top" alt="pic">
+                        <div class="card-body">
+                            <h4 class="card-title">Verify Payment</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm">
+                <a href="{% url 'courses_for_admit' %}">
+                    <div class="card">
+                        <img src="{% static 'adminDashboardPics/registerstudent.png' %}" class="card-img-top" alt="pic">
+                        <div class="card-body">
+                            <h4 class="card-title">Register Pupil</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <br>
+        <h3>Show All</h3>
+        <hr>
+        <div class="row">
+            <div class="col-sm">
+                <a href="{% url 'courses_for_applications' %}">
+                    <div class="card">
+                        <img src="{% static 'adminDashboardPics/applied.png' %}" class="card-img-top" alt="pic">
+                        <div class="card-body">
+                            <h4 class="card-title sa">Applied Pupil</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm">
+                <a href="{% url 'courses_for_verified' %}">
+                    <div class="card">
+                        <img src="{% static 'adminDashboardPics/verified.png' %}" class="card-img-top" alt="pic">
+                        <div class="card-body">
+                            <h4 class="card-title sa">Verified Pupil</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm">
+                <a href="{% url 'courses_for_cutoffs' %}">
+                    <div class="card">
+                        <img src="{% static 'adminDashboardPics/selected.png' %}" class="card-img-top" alt="pic">
+                        <div class="card-body">
+                            <h4 class="card-title sa">Selected Pupil</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm">
+                <a href="{% url 'courses_for_fees_paid' %}">
+                    <div class="card">
+                        <img src="{% static 'adminDashboardPics/paid.png' %}" class="card-img-top" alt="pic">
+                        <div class="card-body">
+                            <h4 class="card-title sa">Fees Paid Pupil</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm">
+                <a href="{% url 'courses_for_admitted' %}">
+                    <div class="card">
+                        <img src="{% static 'adminDashboardPics/registered.png' %}" class="card-img-top" alt="pic">
+                        <div class="card-body">
+                            <h4 class="card-title sa">Registered Pupil</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    {% endif %}
+{% endblock %}

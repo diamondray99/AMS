@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    Students Verification
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/AdminListView.css' %}">
+{% endblock %}
+
+{% block body %}
+    {% if request.user.is_superuser or request.user.is_staff %}
+        <div class="container mt-3">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#year_1">Year 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#year_2">Year 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#year_3">Year 3</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div id="year_1" class="container tab-pane active"><br>
+                    <div class="container">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Sr. No.</th>
+                                        <th scope="col">Photo</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">SSC Marks</th>
+                                        <th scope="col">HSC Marks</th>
+                                        <th scope="col">MU No.</th>
+                                        <th scope="col">Course</th>
+                                        <th scope="col" class='op'>Operations</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in year1 %}
+                                        <tr>
+                                            <th scope="row">{{ forloop.counter }}</th>
+                                            <td>
+                                                {% if i.photo %}
+                                                    <img src="{{ i.photo.url }}" class="admin" alt="Pic">
+                                                {% else %}
+                                                    <img src="{% static 'basic/no-image.png' %}" class="admin" alt="No Image">
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {{ i.surname }}&nbsp;{{ i.name }}&nbsp;
+                                                {{ i.father_first_name }}&nbsp;{{ i.mother_first_name }}
+                                            </td>
+                                            <td>{{ i.SSC_percentage }}</td>
+                                            <td>{{ i.HSC_percentage }}</td>
+                                            <td>{{ i.MU_application_no }}</td>
+                                            <td>{{ i.course }}</td>
+                                            <td class="op">
+                                                {% if not i.verified %}
+                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                        <a class="btn btn-outline-secondary" href="{% url 'verify_std_details' i.slug %}">View</a>
+                                                    </div>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="year_2" class="container tab-pane fade"><br>
+                    <div class="container">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Sr. No.</th>
+                                        <th scope="col">Photo</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Sem-1</th>
+                                        <th scope="col">Sem-2</th>
+                                        <th scope="col">Aggregate</th>
+                                        <th scope="col">In-house</th>
+                                        <th scope="col">Out-house</th>
+                                        <th scope="col">Course</th>
+                                        <th scope="col" class='op'>Operations</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in year2 %}
+                                        <tr>
+                                            <th scope="row">{{ forloop.counter }}</th>
+                                            <td>
+                                                {% if i.photo.url%}
+                                                    <img src="{{ i.photo.url }}" class="admin" alt="Pic">
+                                                {% else %}
+                                                    <img src="{% static 'basic/no-image.png' %}" class="admin" alt="No Image">
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {{ i.surname }}&nbsp;{{ i.name }}&nbsp;
+                                                {{ i.father_first_name }}&nbsp;{{ i.mother_first_name }}
+                                            </td>
+                                            <td>{{ i.semester_1_SGPI }}</td>
+                                            <td>{{ i.semester_2_SGPI }}</td>
+                                            <td>{{ i.aggregate_1 }}</td>
+                                            <td>
+                                                {% if i.in_house == True %}
+                                                    <img src="{% static 'basic/yes.png' %}" class="admin" alt="Yes">
+                                                {% else %}
+                                                    <img src="{% static 'basic/no.png' %}" class="admin" alt="No">
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if i.out_house == True %}
+                                                    <img src="{% static 'basic/yes.png' %}" class="admin" alt="Yes">
+                                                {% else %}
+                                                    <img src="{% static 'basic/no.png' %}" class="admin" alt="No">
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ i.course }}</td>
+                                            <td class="op">
+                                                {% if not i.verified %}
+                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                        <a class="btn btn-outline-secondary" href="{% url 'verify_std_details' i.slug %}">View</a>
+                                                    </div>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="year_3" class="container tab-pane fade"><br>
+                    <div class="container">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Sr. No.</th>
+                                        <th scope="col">Photo</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Sem-1</th>
+                                        <th scope="col">Sem-2</th>
+                                        <th scope="col">Sem-3</th>
+                                        <th scope="col">Sem-4</th>
+                                        <th scope="col">Aggregate</th>
+                                        <th scope="col">In-house</th>
+                                        <th scope="col">Out-house</th>
+                                        <th scope="col">Course</th>
+                                        <th scope="col" class='op'>Operations</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in year3 %}
+                                        <tr>
+                                            <th scope="row">{{ forloop.counter }}</th>
+                                            <td>
+                                                {% if i.photo.url%}
+                                                    <img src="{{ i.photo.url }}" class="admin" alt="Pic">
+                                                {% else %}
+                                                    <img src="{% static 'basic/no-image.png' %}" class="admin" alt="No Image">
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {{ i.surname }}&nbsp;{{ i.name }}&nbsp;
+                                                {{ i.father_first_name }}&nbsp;{{ i.mother_first_name }}
+                                            </td>
+                                            <td>{{ i.semester_1_SGPI }}</td>
+                                            <td>{{ i.semester_2_SGPI }}</td>
+                                            <td>{{ i.semester_3_SGPI }}</td>
+                                            <td>{{ i.semester_4_SGPI }}</td>
+                                            <td>{{ i.aggregate_2 }}</td>
+                                            <td>
+                                                {% if i.in_house == True %}
+                                                    <img src="{% static 'basic/yes.png' %}" class="admin" alt="Yes">
+                                                {% else %}
+                                                    <img src="{% static 'basic/no.png' %}" class="admin" alt="No">
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if i.out_house == True %}
+                                                    <img src="{% static 'basic/yes.png' %}" class="admin" alt="Yes">
+                                                {% else %}
+                                                    <img src="{% static 'basic/no.png' %}" class="admin" alt="No">
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ i.course }}</td>
+                                            <td class="op">
+                                                {% if not i.verified %}
+                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                        <a class="btn btn-outline-secondary" href="{% url 'verify_std_details'  i.slug %}">View</a>
+                                                    </div>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

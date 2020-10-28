@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+{% block css %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all_forms.css' %}">
+
+{% endblock %}
+
+{% block body %}
+    {% include 'snippets/CRUD/CRUD_form.html' with var=var title=title %}
+{% endblock %}

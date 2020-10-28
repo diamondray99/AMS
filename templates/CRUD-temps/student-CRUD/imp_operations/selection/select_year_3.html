@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    Year 3 Selection
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/adminDashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/AdminListView.css' %}">
+    <style>
+        .table-responsive   {
+            height: 50vh;
+            border: 1px solid black;
+            overflow: scroll;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    {% if request.user.is_superuser or request.user.is_staff %}
+        <div class="container">
+            <h2>Year 3</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Sr. No.</th>
+                            <th scope="col">Photo</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Sem-1</th>
+                            <th scope="col">Sem-2</th>
+                            <th scope="col">Sem-3</th>
+                            <th scope="col">Sem-4</th>
+                            <th scope="col">Aggregate</th>
+                            <th scope="col">In-house</th>
+                            <th scope="col">Out-house</th>
+                            <th scope="col">Course</th>
+                            <th scope="col" class='op'>Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in year3 %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>
+                                    {% if i.photo.url%}
+                                        <img src="{{ i.photo.url }}" class="admin" alt="Pic">
+                                    {% else %}
+                                        <img src="{% static 'basic/no-image.png' %}" class="admin" alt="No Image">
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {{ i.surname }}&nbsp;{{ i.name }}&nbsp;
+                                    {{ i.father_first_name }}&nbsp;{{ i.mother_first_name }}
+                                </td>
+                                <td>{{ i.semester_1_SGPI }}</td>
+                                <td>{{ i.semester_2_SGPI }}</td>
+                                <td>{{ i.semester_3_SGPI }}</td>
+                                <td>{{ i.semester_4_SGPI }}</td>
+                                <td>{{ i.aggregate_2 }}</td>
+                                <td>
+                                    {% if i.in_house == True %}
+                                        <img src="{% static 'basic/yes.png' %}" class="admin" alt="Yes">
+                                    {% else %}
+                                        <img src="{% static 'basic/no.png' %}" class="admin" alt="No">
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if i.out_house == True %}
+                                        <img src="{% static 'basic/yes.png' %}" class="admin" alt="Yes">
+                                    {% else %}
+                                        <img src="{% static 'basic/no.png' %}" class="admin" alt="No">
+                                    {% endif %}
+                                </td>
+                                <td>{{ i.course }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% include 'snippets/CRUD/CRUD_form.html' with var=var %}
+        </div>
+    {% endif %}
+
+{% endblock %}

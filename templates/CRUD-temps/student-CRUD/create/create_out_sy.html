@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all_forms.css' %}">
+
+{% endblock %}
+
+{% block body %}
+    {% include 'snippets/CRUD/CRUD_form.html' with validate=validate var=var title=title %}
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        function Validate(){
+            const out_house = document.getElementById("id_in_house");
+            const year = document.getElementById("id_year_2")
+            if (out_house.checked === false){
+                alert("In-house Column should checked!");
+                return false;
+            }
+            if (year.checked === false){
+                alert("Year Column should checked!");
+                return false;
+            }
+        }
+    </script>
+
+{% endblock %}

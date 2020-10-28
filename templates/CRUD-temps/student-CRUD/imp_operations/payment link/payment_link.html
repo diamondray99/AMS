@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+
+    <style>
+        .container{
+            margin-top: 3%;
+            width: 100%;
+        }
+        .jumbotron{
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        img{
+            width: 10rem;
+            height: auto;
+        }
+        .main{
+            font-weight: bold;
+        }
+        @media screen and (min-width: 601px) {
+            .ans{
+                font-size: 20px;
+            }
+            .main {
+              font-size: 25px;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .ans{
+                font-size: 12px;
+            }
+            .main {
+                font-size: 15px;
+            }
+        }
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all_forms.css' %}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="jumbotron">
+            {% if object.photo %}
+                <img class="rounded mx-auto d-block" src="{{  object.photo.url }}" alt="Pic">
+            {% endif %}
+            <div class="container">
+                <div class="row">
+                    <div class="col main">Name</div>
+                    <div class="col ans">
+                        {{ object.surname}}&nbsp;{{ object.name }}&nbsp;
+                        {{ object.father_first_name }}&nbsp;{{ object.mother_first_name }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Date of birth</div>
+                    <div class="col ans">
+                        {{ object.date_of_birth }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Gender</div>
+                    <div class="col ans">
+                        {{ object.gender }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Aadhaar</div>
+                    <div class="col ans">
+                        {{ object.aadhaar }}
+                    </div><div class="w-100"></div><br>
+
+                    <div class="col main">Phone</div>
+                    <div class="col ans">
+                        {{ object.phone }}
+                    </div><div class="w-100"></div><br>
+
+                    {% if object.alternate_phone %}
+                        <div class="col main">Alternate Phone</div>
+                            <div class="col ans">
+                            {{ object.alternate_phone }}
+                        </div><div class="w-100"></div><br>
+                    {% endif %}
+
+                    <div class="col main">Email</div>
+                    <div class="col ans">
+                        {{ object.email }}
+                    </div><div class="w-100"></div><br>
+                </div>
+            </div>
+            <img class="mx-auto d-block" src="{% static 'basic/payment.png' %}" alt="payment">
+            {% include 'snippets/CRUD/CRUD_form.html' with var=var title=title %}
+        </div>
+
+    </div>
+{% endblock %}

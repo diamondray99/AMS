@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+{% block css %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all_forms.css' %}">
+
+{% endblock %}
+
+{% block body %}
+    {% if request.user.is_superuser or  request.user.is_staff %}
+        {% include 'snippets/CRUD/CRUD_form.html' with var=var title=title %}
+    {% else %}
+        <h4>You are not permitted here!</h4>
+    {% endif %}
+{% endblock %}

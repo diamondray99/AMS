@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+
+    College Details
+
+{% endblock %}
+
+
+{% block css %}
+
+    <style>
+        .jumbotron {
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 3%;
+        }
+
+        .jumbotron:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        .container{
+            margin-top: 2%;
+        }
+        .card-img{
+            height: 100%;
+            border-radius: 10px;
+        }
+        .btn-info{
+            margin-bottom: 1%;
+        }
+    </style>
+
+{% endblock %}
+
+
+{% block body %}
+    {% if request.user.is_superuser or request.user.is_staff %}
+        <div class="container">
+            <div class="jumbotron">
+                <div class="row">
+                    {% if object.image %}
+                        <div class="col-sm-4">
+                            <img class="card-img" src="{{ object.image.url }}" alt="pic">
+                        </div>
+                        <div class="col-sm-8">
+                            <h1 class="display-4">{{ object.title}}</h1>
+                            <p class="lead">{{ object.sub_title}}</p>
+                            <hr class="my-4">
+                            <p>{{ object.details }}</p>
+                            {% if object.file %}
+                                <a class="btn btn-info" href="{{ object.file.url }}" role="button">View File</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+{% endblock %}

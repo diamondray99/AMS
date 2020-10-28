@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all_forms.css' %}">
+
+{% endblock %}
+
+{% block body %}
+    {% if request.user.is_superuser or  request.user.is_staff %}
+        {% include 'snippets/CRUD/CRUD_form.html' with var=var title=title validate=validate %}
+    {% else %}
+        <h4>You are not permitted here!</h4>
+    {% endif %}
+{% endblock %}
+
+{% block js %}
+    <script>
+        function Validate(){
+            const year_1 = document.getElementById("id_year_1")
+            const year_2 = document.getElementById("id_year_2")
+            const year_3 = document.getElementById("id_year_3")
+            if (year_1.checked === true && year_2.checked === true && year_3.checked === true){
+                alert("Only one year can be check!");
+                return false;
+            }
+            if (year_1.checked === false && year_2.checked === true && year_3.checked === true){
+                alert("Only one year can be check!");
+                return false;
+            }
+            if (year_1.checked === true && year_2.checked === false && year_3.checked === true){
+                alert("Only one year can be check!");
+                return false;
+            }
+            if (year_1.checked === true && year_2.checked === true && year_3.checked === false){
+                alert("Only one year can be check!");
+                return false;
+            }
+            if (year_1.checked === false && year_2.checked === false && year_3.checked === false){
+                alert("At least on should be check!");
+                return false;
+            }
+        }
+    </script>
+{% endblock %}

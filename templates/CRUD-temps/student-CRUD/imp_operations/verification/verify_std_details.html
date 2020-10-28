@@ -1,0 +1,302 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+
+    <style>
+        .container{
+            margin-top: 3%;
+            width: 100%;
+        }
+        .jumbotron{
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        img{
+            width: 10rem;
+            height: auto;
+        }
+        .main{
+            font-weight: bold;
+        }
+        @media screen and (min-width: 601px) {
+            .ans{
+                font-size: 20px;
+            }
+            .main {
+              font-size: 25px;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .ans{
+                font-size: 12px;
+            }
+            .main {
+                font-size: 15px;
+            }
+        }
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all_forms.css' %}">
+{% endblock %}
+
+{% block body %}
+    {% if request.user.is_superuser or request.user.is_staff %}
+    <div class="container">
+        <div class="jumbotron">
+            {% for i in object %}
+                {% if i.photo %}
+                    <img class="rounded mx-auto d-block" src="{{  i.photo.url }}" alt="Pic">
+                {% endif %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col main">Name</div>
+                        <div class="col ans">
+                            {{ i.surname}}&nbsp;{{ i.name }}&nbsp;
+                            {{ i.father_first_name }}&nbsp;{{ i.mother_first_name }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Date of birth</div>
+                        <div class="col ans">
+                            {{ i.date_of_birth }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Place of Birth</div>
+                        <div class="col ans">
+                            {{ i.place_of_birth }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Gender</div>
+                        <div class="col ans">
+                            {{ i.gender }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Blood Group</div>
+                        <div class="col ans">
+                            {{ i.blood_group }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Nationality</div>
+                        <div class="col ans">
+                            {{ i.nationality }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Nationality</div>
+                        <div class="col ans">
+                            {{ i.nationality }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Religion</div>
+                        <div class="col ans">
+                            {{ i.religion }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Mother Tongue</div>
+                        <div class="col ans">
+
+                            {{ i.mother_tongue }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Aadhaar</div>
+                        <div class="col ans">
+                            {{ i.aadhaar }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Phone</div>
+                        <div class="col ans">
+                            {{ i.phone }}
+                        </div><div class="w-100"></div><br>
+
+                        {% if i.alternate_phone %}
+                            <div class="col main">Alternate Phone</div>
+                                <div class="col ans">
+                                {{ i.alternate_phone }}
+                            </div><div class="w-100"></div><br>
+                        {% endif %}
+
+                        <div class="col main">Email</div>
+                        <div class="col ans">
+                            {{ i.email }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Physically Challenged</div>
+                        {% if i.physically_challenged %}
+                            <div class="col ans">
+                                <i class="fas fa-check-circle" style="color: green"></i>
+                            </div><div class="w-100"></div><br>
+                        {% else %}
+                            <div class="col ans">
+                                <i class="fas fa-times-circle" style="color: red"></i>
+                            </div><div class="w-100"></div><br>
+                        {% endif %}
+
+                        <div class="col main">Flat/Building/Street/Area</div>
+                        <div class="col ans">
+                            {{ i.flat_building_street_area }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Pincode</div>
+                        <div class="col ans">
+                            {{ i.pincode }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">City</div>
+                        <div class="col ans">
+                            {{ i.city }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">District</div>
+                        <div class="col ans">
+                            {{ i.district }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Tehsil</div>
+                        <div class="col ans">
+                            {{ i.tehsil }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Guardian Full Name</div>
+                        <div class="col ans">
+                            {{ i.guardian_full_name }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Guardian Phone</div>
+                        <div class="col ans">
+                            {{ i.guardian_phone }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Guardian Email</div>
+                        <div class="col ans">
+                            {{ i.guardian_email }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Guardian Occupation</div>
+                        <div class="col ans">
+                            {{ i.guardian_occupation }}
+                        </div><div class="w-100"></div><br>
+
+                        <div class="col main">Guardian Annual Income</div>
+                        <div class="col ans">
+                            {{ i.guardian_annual_income }}
+                        </div><div class="w-100"></div><br>
+
+                        {% if i.MU_application_no %}
+                            <div class="col main">MU Application No.</div>
+                            <div class="col ans">
+                                {{ i.MU_application_no }}
+                            </div><div class="w-100"></div><br>
+                        {% endif %}
+
+                        {% if i.previous_college_name %}
+                            <div class="col main">Previous College Name</div>
+                            <div class="col ans">
+                                {{ i.previous_college_name }}
+                            </div><div class="w-100"></div><br>
+                        {% endif %}
+
+                        {% if i.previous_passing_year %}
+                            <div class="col main">Previous Passing Year</div>
+                            <div class="col ans">
+                                {{ i.previous_passing_year }}
+                            </div><div class="w-100"></div><br>
+                        {% endif %}
+
+                        {% if i.SSC_percentage %}
+                            <div class="col main">SSC Score</div>
+                            <div class="col ans">
+                                {{ i.SSC_percentage }}
+                            </div><div class="w-100"></div><br>
+                        {% endif %}
+
+                        {% if i.HSC_percentage %}
+                            <div class="col main">HSC Score</div>
+                            <div class="col ans">
+                                {{ i.HSC_percentage }}
+                            </div><div class="w-100"></div><br>
+                        {% endif %}
+
+                        {% if i.semester_1_SGPI %}
+                            <div class="col main">Semester 1 SGPI</div>
+                            <div class="col ans">
+
+                                {{ i.semester_1_SGPI }}
+                            </div><div class="w-100"></div><br>
+                        {% endif %}
+
+                        {% if i.semester_2_SGPI %}
+                            <div class="col main">Semester 2 SGPI</div>
+                            <div class="col ans">
+                                {{ i.semester_2_SGPI }}
+                            </div><div class="w-100"></div><br>
+                        {% endif %}
+
+                        {% if i.semester_3_SGPI %}
+                            <div class="col main">Semester 3 SGPI</div>
+                            <div class="col ans">
+                                {{ i.semester_3_SGPI }}
+                            </div><div class="w-100"></div><br>
+                        {% endif %}
+
+                        {% if i.semester_4_SGPI %}
+                            <div class="col main">Semester 4 SGPI</div>
+                            <div class="col ans">
+                                {{ i.semester_4_SGPI }}
+                            </div><div class="w-100"></div><br>
+                        {% endif %}
+
+                        {% if i.SSC_mark_sheet %}
+                            <div class="col main">SSC Mark Sheet</div>
+                            <div class="col ans">
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ i.SSC_mark_sheet.url }}">View File</a>
+                            </div>
+                            <div class="w-100"></div><br>
+                        {% endif %}
+
+                        {% if i.HSC_mark_sheet %}
+                            <div class="col main">HSC Mark Sheet</div>
+                            <div class="col ans">
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ i.HSC_mark_sheet.url }}">View File</a>
+                            </div>
+                            <div class="w-100"></div><br>
+                        {% endif %}
+
+                        {% if i.previous_year_mark_sheet %}
+                            <div class="col main">Previous Year Mark Sheet</div>
+                            <div class="col ans">
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ i.previous_year_mark_sheet.url }}">View File</a>
+                            </div>
+                            <div class="w-100"></div><br>
+                        {% endif %}
+
+                        {% if i.MU_application %}
+                            <div class="col main">Mumbai University Application</div>
+                            <div class="col ans">
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ i.MU_application.url }}">View File</a>
+                            </div>
+                            <div class="w-100"></div><br>
+                        {% endif %}
+
+                        {% if i.in_house %}
+                            <div class="col main">In-House</div>
+                            <div class="col ans">
+                                <i class="fas fa-check-circle" style="color: green"></i>
+                            </div><div class="w-100"></div><br>
+                        {% endif %}
+
+                        {% if i.out_house %}
+                            <div class="col main">Out-House</div>
+                            <div class="col ans">
+                                <i class="fas fa-check-circle" style="color: green"></i>
+                            </div><div class="w-100"></div><br>
+                        {% endif %}
+                    </div>
+                </div>
+                {% include 'snippets/CRUD/CRUD_form.html' with var=var title=title %}
+            {% endfor %}
+        </div>
+
+    </div>
+    {% endif %}
+{% endblock %}

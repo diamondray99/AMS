@@ -1,0 +1,22 @@
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% if title %}
+    <div class="container-fluid">
+        <h1>{{ title }}</h1>
+    </div>
+{% endif %}
+
+<div class="container">
+    <form method="POST" {% if validate == 'validate' %}onsubmit="return Validate()"{% endif %}  enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if var == 'Delete' %}
+            <p>Are you sure you want to delete "{{ object }}"?</p>
+        {% endif %}
+        {{ form|crispy }}
+        <input type="submit" value="{% if var %}{{ var }}{% endif %}" class="btn btn-success">
+    </form>
+</div>
+
+
+

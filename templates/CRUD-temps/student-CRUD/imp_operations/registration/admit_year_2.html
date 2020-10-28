@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    Year 2 Selection
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/adminDashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/AdminListView.css' %}">
+    <style>
+        .table-responsive   {
+            height: 50vh;
+            border: 1px solid black;
+            overflow: scroll;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    {% if request.user.is_superuser or request.user.is_staff %}
+        <div class="container">
+            <h2>Year 2</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Sr. No.</th>
+                            <th scope="col">Photo</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Course</th>
+                            <th scope="col" class='op'>Verified</th>
+                            <th scope="col" class='op'>Selected</th>
+                            <th scope="col" class='op'>Fees Paid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in year3 %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>
+                                    {% if i.photo.url%}
+                                        <img src="{{ i.photo.url }}" class="admin" alt="Pic">
+                                    {% else %}
+                                        <img src="{% static 'basic/no-image.png' %}" class="admin" alt="No Image">
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {{ i.surname }}&nbsp;{{ i.name }}&nbsp;
+                                    {{ i.father_first_name }}&nbsp;{{ i.mother_first_name }}
+                                </td>
+                                <td>{{ i.course }}</td>
+                                <td class="op">
+                                    {% if i.verified %}
+                                        <img src="{% static 'basic/yes.png' %}" class="admin" alt="No Image">
+                                    {% endif %}
+                                </td>
+                                <td class="op">
+                                    {% if i.selected %}
+                                        <img src="{% static 'basic/yes.png' %}" class="admin" alt="No Image">
+                                    {% endif %}
+                                </td>
+                                <td class="op">
+                                    {% if i.fees_paid %}
+                                        <img src="{% static 'basic/yes.png' %}" class="admin" alt="No Image">
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            {% include 'snippets/CRUD/CRUD_form.html' with var=var %}
+        </div>
+    {% endif %}
+
+{% endblock %}

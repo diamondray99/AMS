@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    List College Details
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/adminDashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/AdminListView.css' %}">
+{% endblock %}
+
+{% block body %}
+
+    {% if request.user.is_superuser or  request.user.is_staff %}
+         <div class="container">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Username</th>
+                            <th scope="col" class='op'>Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in object_list %}
+                            <tr>
+{#                                {% if request.user.username != i.username %}#}
+                                    <td>{{ i.first_name }}&nbsp;{{ i.last_name }}</td>
+                                    <td>{{ i.username }}</td>
+                                    <td class="op">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a class="btn btn-outline-secondary" href="{% url 'workforce_detail' i.pk %}">View</a>
+                                            <a class="btn btn-primary" href="{% url 'update_workforce' i.pk %}">Update</a>
+                                            <a class="btn btn-danger" href="{% url 'delete_workforce' i.pk %}">Delete</a>
+                                        </div>
+                                    </td>
+{#                                {% endif %}#}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

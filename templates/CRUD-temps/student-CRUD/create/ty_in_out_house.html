@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    In/Out House?
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/adminDashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/AdminListView.css' %}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>In/Out-House?</h1><hr>
+        <ul class="list-group list-group-horizontal-sm">
+            <li class="list-group-item mx-auto">
+                <a style="text-decoration: none;" href="{% url 'ty_in_form' %}">
+                    <div class="card card-user">
+                        <div class="card-body">
+                            <h3 class="card-title">In-House</h3>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="list-group-item mx-auto">
+                <a style="text-decoration: none;" href="{% url 'ty_out_form' %}">
+                    <div class="card card-user">
+                        <div class="card-body">
+                            <h3 class="card-title">Out-House</h3>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

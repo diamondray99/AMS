@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block page_title %}
+    Login
+{% endblock %}
+
+{% block css%}
+<style>
+    body{
+        background: whitesmoke;
+		font-family: 'Roboto', sans-serif;
+	}
+    .login-form {
+		width: 340px;
+    	margin: 50px auto;
+	}
+    .login-form form {
+    	margin-bottom: 15px;
+        background: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+        border-radius: 10px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    h2{
+        color: black;
+        font-family: Montserrat, sans-serif;
+
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {
+        font-size: 15px;
+        font-weight: bold;
+    }
+    input[type=text], input[type=password], button[type=submit]{
+        border-radius: 10px;
+    }
+
+    label{
+        color: black;
+    }
+</style>
+
+{% endblock %}
+
+{% block body %}
+    <div class="login-form">
+        <form method="POST">
+            {% csrf_token %}
+            <h2 class="text-center">Login</h2>
+            <hr>
+            {{ form|crispy }}
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Log in</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
