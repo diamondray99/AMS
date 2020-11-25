@@ -136,8 +136,8 @@ LOGOUT_REDIRECT_URL = 'home'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'kirra000deathnote@gmail.com'
-EMAIL_HOST_PASSWORD = 'deathnotepassword'
+EMAIL_HOST_USER = 'email_id'
+EMAIL_HOST_PASSWORD = 'email_id_password'
 EMAIL_USE_TLS = True
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 100000
